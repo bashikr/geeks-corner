@@ -21,6 +21,6 @@ Geeks Corner is a forum to help students communicating and collaborating with ea
 
 3- Enter the repository sql/ddl and then run
 
-```bash  bash database.bash```
+``` bash database.bash ```
 
 Congratulations!
