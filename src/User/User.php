@@ -2,18 +2,17 @@
 
 namespace Anax\User;
 
-use Anax\DatabaseActiveRecord\ActiveRecordModel;
+use Anax\Extra\ExtraActiveRecordModel;
 
 /**
  * A database driven model using the Active Record design pattern.
  */
-class User extends ActiveRecordModel
+class User extends ExtraActiveRecordModel
 {
     /**
      * @var string $tableName name of the database table.
      */
     protected $tableName = "Users";
-
 
 
     /**
@@ -25,7 +24,6 @@ class User extends ActiveRecordModel
     public $firstname;
     public $lastname;
     public $email;
-    public $image;
     public $password;
     public $gender;
 
@@ -43,11 +41,6 @@ class User extends ActiveRecordModel
     public function validateUser($email, $password)
     {
         $this->find("email", $email);
-
-        if (password_verify($password, $this->password) == true) {
-            return true;
-        } elseif((password_verify($password, $this->password) == false)) {
-            return false;
-        }
+        return password_verify($password, $this->password);
     }
 }

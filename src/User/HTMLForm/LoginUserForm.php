@@ -24,8 +24,7 @@ class LoginUserForm extends FormModel
         parent::__construct($di);
         $this->form->create(
             [
-                "id" => __CLASS__,
-                "legend" => "login",
+                "id" => __CLASS__
             ],
             [
                 "email" => [
@@ -56,18 +55,25 @@ class LoginUserForm extends FormModel
      */
     public function callbackSubmit() : bool
     {
+        // Get values from the submitted form
+        $email       = $this->form->value("email");
+        $password      = $this->form->value("password");
         $user = new User();
         $user->setDb($this->di->get("dbqb"));
-
-        
-        $user->email = $this->form->value("email");
-        $user->password = $this->form->value("password");
-        if ($user->validateUser($user->email, $user->password) == true) {
-
-            return true;
+        $res = $user->validateUser($email, $password);
+        if (!$res) {
+            $this->form->rememberValues();
+            $this->form->addOutput("User or password did not match.");
+            return false;
         }
-        $this->form->addOutput("You have either given a wrong password or email");
-        return false;
+        $session = $this->di->get("session");
+        $session->set("login", true);
+        $session->set("user", $email);
+        $session->set("userId", $user->id);
+        $session->set("firstname", $user->firstname);
+        $session->set("lastname", $user->lastname);
+        $this->form->addOutput("User " . $user->email . " logged in.");
+        return true;
     }
 
 
@@ -79,6 +85,16 @@ class LoginUserForm extends FormModel
      */
     public function callbackSuccess()
     {
-        $this->di->get("response")->redirect("user/crud/view-all")->send();
+        $this->di->get("response")->redirect("user")->send();
+    }
+
+        /**
+     * Callback what to do if the form was successfully submitted, this
+     * happen when the submit callback method returns true. This method
+     * can/should be implemented by the subclass for a different behaviour.
+     */
+    public function callbackFail()
+    {
+        $this->di->get("response")->redirect("user/login")->send();
     }
 }

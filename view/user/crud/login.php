@@ -14,6 +14,8 @@ if (isset($class)) {
 
 
 ?>
-<article style="text-align:center;" <?= classList($classes) ?>>
-<?= $form ?>
-</article>
+
+<h1 style="border-bottom:none;text-align:center;">User login</h1>
+<div class="form" style="height:300px;width:50%;padding-top:20px;">
+    <?= $form ?>
+</div>

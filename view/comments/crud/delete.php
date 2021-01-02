@@ -1,12 +1,8 @@
 <?php
-
 namespace Anax\View;
 
 // Create urls for navigation
-$urlToView = url("user");
-
-
-
+$urlToView = url("comments");
 ?><h1>Delete an item</h1>
 
 <?= $form ?>

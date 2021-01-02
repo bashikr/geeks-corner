@@ -24,9 +24,6 @@ endif;
         <?php endforeach; ?>
     </div>
 
-
-
-
 <style>
     .box {
         border: 2px solid #333;

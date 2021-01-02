@@ -1,5 +1,7 @@
-#### Kontakt
-
-Din åsikt är viktig. Således vi vill gärna höra av dig via:
+#### Contact
+<p style="text-align:left;">
+To keep in touch, please contact us on the following email:
+<br><br>
 
 bashikr@gmail.com
+</p>

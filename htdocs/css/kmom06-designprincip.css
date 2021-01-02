@@ -4895,6 +4895,8 @@ a.rm-button.rm-clicked .rm-button-face-2 {
   position: relative;
   left: 0;
 }
+
+
 /**
  * Menu layout for the max variant, for mobile screens and complete menues.
  * Swipe from right by default.
@@ -5115,7 +5117,7 @@ body {
   margin: 0;
   padding: 0;
   color: #111;
-  background-color: gainsboro;
+  background-color: white;
   font: 18px/1.33333333 MyriadPro-Regular, "Myriad Pro Regular", MyriadPro, 'Myriad Pro', Helvetica, Arial, sans-serif;
 }
 img {
@@ -5555,15 +5557,11 @@ hr::after {
 .region-main {
   display: inline;
   float: left;
-  /* width: 73.95833333%; */
-  width: 100%;
+  color: black;
+  width: 98.95833333%;
   margin-left: 0.52083333%;
   margin-right: 0.52083333%;
-  margin-left: 8.85416667%;
-  /* background-color: #E5EAFE; */
-  color: black;
-  /* box-shadow: 0 0 10px black; */
-
+  height:auto;
 }
 .region-main.has-sidebar {
   border: 2px solid none;
@@ -5693,8 +5691,8 @@ hr::after {
 .region-main.has-sidebar-right {
   display: inline;
   float: left;
+  float: left;
   width: 69.79166667%;
-  /* width: 70%; */
   margin-left: 0.52083333%;
   margin-right: 0.52083333%;
   color: black;
@@ -5744,10 +5742,16 @@ hr::after {
 }
 .region-sidebar-left.has-sidebar-right,
 .region-sidebar-right.has-sidebar-left {
+  /* display: inline; */
+  /* float: left; */
+  /* width: 15%; */
+  /* width: 19.79166667%; */
+  /* margin-left: 0.52083333%; */
+  /* margin-right: 0.52083333%; */
+  /* margin-top: 0; */
   display: inline;
   float: left;
-  width: 15%;
-  /* width: 19.79166667%; */
+  width: 19.79166667%;
   margin-left: 0.52083333%;
   margin-right: 0.52083333%;
   margin-top: 0;
@@ -5775,8 +5779,8 @@ hr::after {
 .region-main.has-sidebar-left {
   display: inline;
   float: left;
+  float: left;
   width: 69.79166667%;
-  /* width: 70%; */
   margin-left: 0.52083333%;
   margin-right: 0.52083333%;
   color: black;
@@ -6148,7 +6152,7 @@ a.rm-button .rm-button-face-2 {
   background:#978c78;
   background-size: cover;
   background-blend-mode: darken;
-  height: 60vh;
+  height: 500px;
   max-width: 100%;
   width: 100%;
   background-position: center;
@@ -6211,8 +6215,8 @@ a.rm-button .rm-button-face-2 {
   margin-left: 0.52083333%;
   margin-right: 0.52083333%;
   text-align: center;
-  font-size:24px;
-  padding-top: 20vh;
+  font-size:20px;
+  padding-top: 10px;
   /* color:black; */
   font-weight:505;
 }
@@ -6249,36 +6253,7 @@ code,
 samp {
   color: black;
 }
-/* Safari 4.0 - 8.0 */
-@-webkit-keyframes example {
-  0% {
-    background-color: #c93333;
-  }
-  25% {
-    background-color: yellow;
-  }
-  50% {
-    background-color: rgba(51, 97, 186, 0.94);
-  }
-  100% {
-    background-color: rgba(81, 154, 54, 0.8);
-  }
-}
-/* Standard syntax */
-@keyframes example {
-  0% {
-    background-color: #c93333;
-  }
-  25% {
-    background-color: gray;
-  }
-  50% {
-    background-color: rgba(51, 97, 186, 0.94);
-  }
-  100% {
-    background-color: rgba(81, 154, 54, 0.8);
-  }
-}
+
 .report {
   box-shadow: 0 0 10px black;
 }
@@ -6570,7 +6545,7 @@ i {
   .region-main.has-sidebar-left.has-sidebar-right {
     display: inline;
     float: left;
-    width: 98.95833333%;
+    width: 57.29166667%;
     margin-left: 0.52083333%;
     margin-right: 0.52083333%;
   }
@@ -6619,9 +6594,6 @@ i {
     padding-left: 0;
   }
 
-  .site-footer {
-    display: none;
-  }
   .byline {
     margin-bottom: 12px;
   }
@@ -7045,3 +7017,175 @@ i {
 .dice-sprite.dice-4 { background-position: -64px 0; }
 .dice-sprite.dice-5 { background-position: -32px 0; }
 .dice-sprite.dice-6 { background-position: 0 0; }
+
+
+
+.form {
+  text-align:center;
+  width:75%;
+  margin:20px auto;
+  border:5px solid black;
+  height:200px;
+  border-radius:20px;
+}
+
+fieldset {
+  border:none;
+}
+
+.button {
+  font-size: 1em;
+  font-family: arial, sans-serif;
+  border: 1px solid #efd343;
+  padding: 1em 1.2em;
+  height: 46px;
+  text-decoration: none;
+  background-color: #efd343;
+  font-weight: 505;
+  border-radius: 5px;
+}
+
+.button-answer {
+  padding: 10px 20px;
+  text-decoration: none;
+  background-color: #efd343;
+  font-weight: 505;
+  border-radius: 5px;
+}
+
+.button-comment {
+  padding: 10px 10px;
+  text-decoration: none;
+  background-color: #efd343;
+  font-weight: 505;
+  border-radius: 5px;
+}
+
+.button a:hover {
+  font-size: 1em;
+  font-family: arial, sans-serif;
+  border: 1px solid #efd343;
+  padding: 1em 1.2em;
+  height: 46px;
+  text-decoration: none;
+  color: #efd343;
+  background-color: #333;
+  font-weight: 505;
+  border-radius: 5px;
+}
+
+.box {
+  border: 2px solid #333;
+  width: 50%;
+  max-width: 100%;
+  text-align: center;
+  margin-bottom:20px;
+  float:both;
+  margin:auto;
+}
+
+.box-questions {
+  border: 5px solid #333;
+  width: 75%;
+  max-width: 100%;
+  text-align: center;
+  margin-bottom:20px;
+  float:both;
+  margin:auto;
+  border-radius: 25px;
+}
+
+
+.box-questions h2 {
+  margin-top:0;
+  border-bottom:2px solid black;
+  background:#978C78;
+  border-radius: 19px 19px 0 0;
+  color:#efd343;
+}
+
+.box-questions h3 {
+  border-bottom:2px solid black;
+
+}
+
+.box-questions a {
+  text-decoration:none;
+}
+
+.box-questions h2:hover {
+  background:#efd343;
+  color:#333;
+}
+
+.boxInsideBox {
+  width: 80%;
+  max-width: 100%;
+  text-align: left;
+  float:both;
+  margin:auto;
+}
+
+.tagsI {
+  color: #42a648;
+  padding: 4px;
+  font-size: 20px;
+}
+
+.tagsA {
+  color:green;
+}
+.tagsA:hover {
+  color: red;
+  border-bottom:2px dotted red;
+}
+
+textarea {
+  width:100%;
+  height: 300px;
+}
+
+
+.question-box-view {
+  box-shadow: 0 4px 3px 0 rgba(0,0,0,.16),inset 0 0 0 1px rgba(0,0,0,.08);
+  padding: 29px;
+  /* border-radius: 40px; */
+  width: 65%;
+  max-width: 100%;
+  text-align: center;
+  float:both;
+  margin:20px auto;
+  border: 5px solid #333;
+  text-align: left;
+  border-radius: 25px;
+}
+
+.answer-box-view {
+  box-shadow: 0 4px 3px 0 rgba(0,0,0,.16),inset 0 0 0 1px rgba(0,0,0,.08);
+  text-align: left;
+  padding: 29px;
+  margin:20px auto;
+  float:left;
+  width:60%;
+  border: 5px solid red;
+  border-radius: 25px;
+}
+
+.comment-box-view {
+  float:right;
+  text-align: left;
+  width: 50%;
+  padding-left: 2em;
+  font-size: .9em;
+  padding-right: 2em;
+  border: 5px solid blue;
+  border-radius: 25px;
+  box-shadow: 0 4px 3px 0 rgba(0,0,0,.16),inset 0 0 0 1px rgba(0,0,0,.08);
+}
+
+.voting {
+  padding: 10px;
+  float: right;
+  margin-right: 20px;
+  text-align: center;
+}

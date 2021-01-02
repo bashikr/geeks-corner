@@ -11,7 +11,7 @@ return [
     "items" => [
         [
             "text" => "HOME",
-            "url" => "",
+            "url" => "home",
             "icon" => "./img/about.png",
             "title" => "Home page",
         ],

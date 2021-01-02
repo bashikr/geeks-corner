@@ -2,20 +2,18 @@
 
 namespace Anax\Questions;
 
-use Anax\DatabaseActiveRecord\ActiveRecordModel;
+use Anax\Extra\ExtraActiveRecordModel;
+use Anax\Votes\Votes;
 
 /**
  * A database driven model using the Active Record design pattern.
  */
-class Questions extends ActiveRecordModel
+class Questions extends ExtraActiveRecordModel
 {
     /**
      * @var string $tableName name of the database table.
      */
     protected $tableName = "Questions";
-
-
-
     /**
      * Columns in the table.
      *
@@ -26,4 +24,16 @@ class Questions extends ActiveRecordModel
     public $tags;
     public $question;
     public $created;
+    public $username;
+
+    public function saveVote($userId, $voteId, $voteType, $voteDirection, $di)
+    {
+        $votes = new Votes();
+        $votes->setDb($di->get("dbqb"));
+        $votes->userId = $userId;
+        $votes->voteId = $voteId;
+        $votes->voteType = $voteType;
+        $votes->voteDirection = $voteDirection;
+        $votes->save();
+    }
 }

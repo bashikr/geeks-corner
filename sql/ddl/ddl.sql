@@ -3,35 +3,34 @@ USE geeksCorner;
 SET NAMES utf8;
 
 --
--- Table `Users`
+-- Table Users
 --
 DROP TABLE IF EXISTS `Users`;
 CREATE TABLE `Users` (
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
     `firstname` VARCHAR(100) NOT NULL,
     `lastname` VARCHAR(100) NOT NULL,
-    `image` VARCHAR(100) NOT NULL, 
     `email` VARCHAR(100) UNIQUE NOT NULL,
     `password` VARCHAR(100) NOT NULL,
+    `score` INTEGER DEFAULT 0,
     `gender` VARCHAR(100) DEFAULT "Prefer not to say.",
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `counter` INTEGER,
-    `updated` DATETIME,
-    `deleted` DATETIME,
-    `active` DATETIME
+    `updated` DATETIME
 
 ) ENGINE INNODB CHARACTER SET utf8 COLLATE utf8_swedish_ci;
 
 
 --
--- Table `Questions`
+-- Table Questions
 --
 DROP TABLE IF EXISTS `Questions`;
 CREATE TABLE `Questions` (
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
     `userId` INTEGER NOT NULL,
+    `username`  VARCHAR(100) NOT NULL,
     `tags` VARCHAR(256) NOT NULL,
     `question` TEXT NOT NULL,
+    `votes` INTEGER DEFAULT 0,
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE INNODB CHARACTER SET utf8 COLLATE utf8_swedish_ci;
 
@@ -42,7 +41,51 @@ CREATE TABLE `Questions` (
 DROP TABLE IF EXISTS `Tags`;
 CREATE TABLE `Tags` (
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    `tag` VARCHAR(50) UNIQUE NOT NULL,
+    `tag` VARCHAR(100) UNIQUE NOT NULL,
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `counter` INTEGER
 ) ENGINE INNODB CHARACTER SET utf8mb4 COLLATE utf8mb4_swedish_ci;
+
+
+--
+-- Table Answers
+--
+DROP TABLE IF EXISTS `Answers`;
+CREATE TABLE `Answers` (
+    `id` INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    `questionId` INTEGER NOT NULL,
+    `userId` VARCHAR(100) NOT NULL,
+    `username`  VARCHAR(100) NOT NULL,
+    `votes` INTEGER DEFAULT 0,
+    `answer` TEXT NOT NULL,
+    `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE INNODB CHARACTER SET utf8mb4 COLLATE utf8mb4_swedish_ci;
+
+
+
+--
+-- Table Comments
+--
+DROP TABLE IF EXISTS `Comments`;
+CREATE TABLE `Comments` (
+    `id` INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    `username`  VARCHAR(200) NOT NULL,
+    `userId`  VARCHAR(100) NOT NULL,
+    `questionId` INTEGER,
+    `answerId` INTEGER,
+    `comment` TEXT NOT NULL,
+    `votes` INTEGER DEFAULT 0,
+    `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE INNODB CHARACTER SET utf8 COLLATE utf8_swedish_ci;
+
+--
+-- Table Votes
+--
+DROP TABLE IF EXISTS `Votes`;
+CREATE TABLE `Votes` (
+    `id` INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    `userId` INTEGER NOT NULL,
+    `voteId` INTEGER NOT NULL,
+    `voteType` VARCHAR(200) NOT NULL,
+    `voteDirection` VARCHAR(200) NOT NULL
+) ENGINE INNODB CHARACTER SET utf8 COLLATE utf8_swedish_ci;

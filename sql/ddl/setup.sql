@@ -1,6 +1,8 @@
 DROP DATABASE geeksCorner;
 CREATE DATABASE IF NOT EXISTS geeksCorner;
 
-GRANT ALL ON geeksCorner.* TO user@localhost IDENTIFIED BY 'pass';
+CREATE USER IF NOT EXISTS 'user'@'%' IDENTIFIED BY 'pass';
+
+GRANT ALL PRIVILEGES ON geeksCorner.* TO 'user'@'%';
 
 USE geeksCorner;

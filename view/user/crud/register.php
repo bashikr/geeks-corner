@@ -6,8 +6,9 @@ namespace Anax\View;
 $items = isset($items) ? $items : null;
 
 
-?><h1>Sign up</h1>
+?>
 
-<div style="text-align:center;">
+<h1 style="border-bottom:none;text-align:center;">Register a new user</h1>
+<div class="form" style="text-align:center; margin-bottom:20px; width:50%;margin:auto;height:auto;">
     <?= $form ?>
 </div>

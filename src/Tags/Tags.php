@@ -2,19 +2,17 @@
 
 namespace Anax\Tags;
 
-use Anax\DatabaseActiveRecord\ActiveRecordModel;
+use Anax\Extra\ExtraActiveRecordModel;
 
 /**
  * A database driven model using the Active Record design pattern.
  */
-class Tags extends ActiveRecordModel
+class Tags extends ExtraActiveRecordModel
 {
     /**
      * @var string $tableName name of the database table.
      */
     protected $tableName = "Tags";
-
-
     /**
      * Columns in the table.
      *

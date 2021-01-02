@@ -22,8 +22,7 @@ class CreateUserForm extends FormModel
         parent::__construct($di);
         $this->form->create(
             [
-                "id" => __CLASS__,
-                "legend" => "Details of the item",
+                "id" => __CLASS__
             ],
             [
                 "firstname" => [
@@ -32,14 +31,6 @@ class CreateUserForm extends FormModel
                 ],
 
                 "lastname" => [
-                    "type" => "text",
-                    "validation" => ["not_empty"]
-                ],
-                "image" => [
-                    "type" => "text",
-                    "validation" => ["not_empty"]
-                ],
-                "gender" => [
                     "type" => "text",
                     "validation" => ["not_empty"]
                 ],
@@ -107,7 +98,6 @@ class CreateUserForm extends FormModel
         } elseif(in_array($email, $arr) === false ) {
             $user->firstname  = $this->form->value("firstname");
             $user->lastname = $this->form->value("lastname");
-            $user->image = $this->form->value("image");
             $user->email= $this->form->value("email");
             $user->gender= $this->form->value("gender");
             
@@ -121,7 +111,7 @@ class CreateUserForm extends FormModel
     }
 
 
-        /**
+    /**
      * Callback what to do if the form was successfully submitted, this
      * happen when the submit callback method returns true. This method
      * can/should be implemented by the subclass for a different behaviour.

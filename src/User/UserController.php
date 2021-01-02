@@ -6,10 +6,14 @@ use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
 use Anax\User\HTMLForm\CreateUserForm;
 use Anax\User\HTMLForm\LoginUserForm;
-// use Anax\User\HTMLForm\EditUserForm;
 use Anax\User\HTMLForm\DeleteUserForm;
 use Anax\User\HTMLForm\UpdateUserForm;
 
+
+use Anax\Answers\Answers;
+use Anax\Questions\Questions;
+use Anax\Comments\Comments;
+use Anax\Votes\Votes;
 
 /**
  * A sample controller to show how a controller class can be implemented.
@@ -18,37 +22,76 @@ class UserController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
 
-    public $isLoggedIn = false;
-
     /**
-     * @var $data description
+     * Show all items.
+     *
+     * @return object as a response object
      */
-    //private $data;
+    public function indexAction() : object
+    {
+        $page = $this->di->get("page");
+        $session = $this->di->get("session");
+        $user = new User();
+        $user->setDb($this->di->get("dbqb"));
 
 
+        $user->find("email", $session->get("user"));
+        $questions = new Questions;
+        $questions->setDb($this->di->get("dbqb"));
+        $answers = new Answers;
+        $answers->setDb($this->di->get("dbqb"));
+        $comments = new Comments;
+        $comments->setDb($this->di->get("dbqb"));
+
+
+        $page->add("user/crud/view-all", [
+            "user" => $user,
+            "questions" => $questions,
+            "comments" => $comments,
+            "answers" => $answers,
+        ]);
+        return $page->render([
+            "title" => "User profile",
+        ]);
+    }
 
     /**
      * Show all items.
      *
      * @return object as a response object
      */
-    public function indexActionGet() : object
+    public function viewUserInfoAction(int $userId, string $userInfoURL) : object
     {
         $page = $this->di->get("page");
-        $user = new User();
+        $user = new User($this->di, $userId);
+        $questions = new Questions();
+        $answers = new Answers();
+        $comments = new Comments();
+        $votes = new Votes();
+
         $user->setDb($this->di->get("dbqb"));
+        $answers->setDb($this->di->get("dbqb"));
+        $questions->setDb($this->di->get("dbqb"));
+        $comments->setDb($this->di->get("dbqb"));
+        $votes->setDb($this->di->get("dbqb"));
 
+        $questionVotesUsr = $votes->findAllWhere("userId = ? AND voteType = ?", [$userId, "question"]);
+        $answerVotesUsr = $votes->findAllWhere("userId = ? AND voteType = ?", [$userId, "answer"]);
+        $commentVotesUsr = $votes->findAllWhere("userId = ? AND voteType = ?", [$userId, "comment"]);
 
-        $page->add("user/crud/view-all", [
-            "items" => $user->findAll(),
+        $page->add("user/crud/view-user-info", [
+            "questions" => $questions->findAllWhere("userId = ?", $userId),
+            "answers" => $answers->findAllWhere("userId = ?", $userId),
+            "comments" => $comments->findAllWhere("userId = ?", $userId),
+            "commentVotesUsr" => $commentVotesUsr,
+            "questionVotesUsr" => $questionVotesUsr,
+            "answerVotesUsr" => $answerVotesUsr,
+            "user" => $user->find("id", $userId),
         ]);
-
         return $page->render([
-            "title" => "A collection of items",
+            "title" => "User profile",
         ]);
     }
-
-
 
     /**
      * Handler with form to create a new item.
@@ -68,6 +111,7 @@ class UserController implements ContainerInjectableInterface
         return $page->render([
             "title" => "Sign up a new user",
         ]);
+        
     }
 
 
@@ -88,7 +132,7 @@ class UserController implements ContainerInjectableInterface
         ]);
 
         return $page->render([
-            "title" => "A login page",
+            "title" => "User login",
         ]);
     }
 
@@ -100,27 +144,17 @@ class UserController implements ContainerInjectableInterface
         $this->di->session->delete("login");
         $form = new LoginUserForm($this->di);
         $form->check();
+        $this->di->session->destroy();
 
         $page->add("user/crud/logout", [
-            "form" => $form->getHTML(),
-            "isLoggedIn" => $this->getIsLoggedIn()
+            "form" => $form->getHTML()
         ]);
 
 
         return $page->render([
-            "title" => "A create user page",
+            "title" => "User logout",
 
         ]);
-    }
-
-    public function setIsLoggedIn($value)
-    {
-        $this->isLoggedIn = $value;
-    }
-
-    public function getIsLoggedIn()
-    {
-        return $this->isLoggedIn;
     }
 
     /**
@@ -139,7 +173,7 @@ class UserController implements ContainerInjectableInterface
         ]);
 
         return $page->render([
-            "title" => "Delete an item",
+            "title" => "Delete a user",
         ]);
     }
 
@@ -157,13 +191,20 @@ class UserController implements ContainerInjectableInterface
         $page = $this->di->get("page");
         $form = new UpdateUserForm($this->di, $id);
         $form->check();
+        // var_dump($this->di->session->get("userId"));
 
-        $page->add("user/crud/update", [
-            "form" => $form->getHTML(),
-        ]);
+        if ($this->di->session->get("userId") == $id) {
+            $page->add("user/crud/update", [
+                "form" => $form->getHTML(),
+            ]);
+        } elseif ($this->di->session->get("userId") != $id) {
+            $page->add("user/crud/update", [
+                "form" => "You are not authorized",
+            ]);
+        }
 
         return $page->render([
-            "title" => "Update an item",
+            "title" => "Update a user",
         ]);
     }
 }

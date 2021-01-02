@@ -13,39 +13,51 @@ use Anax\Tags\Tags;
  */
 class CreateQuestionForm extends FormModel
 {
-
     /**
      * Constructor injects with DI container.
      *
      * @param Psr\Container\ContainerInterface $di a service container
      */
-    public function __construct(ContainerInterface $di)
+    public function __construct(ContainerInterface $di, $id)
     {
         parent::__construct($di);
+        $userInfo = $this->getUserDetails($id);
         $this->form->create(
             [
-                "id" => __CLASS__,
-                "legend" => "Details of the item",
+                "id" => __CLASS__
             ],
             [
                 "question" => [
-                    "type" => "text",
-                    "value" => $user->question ?? null,
+                    "type" => "textarea",
+                    "validation" => ["not_empty"],
                 ],
                 "tags" => [
                     "type" => "text",
                     "validation" => ["not_empty"],
-                    "value" => $user->tags ?? null,
+                ],
+                "username" => [
+                    "type" => "hidden",
+                    "validation" => ["not_empty"],
+                    "value" => $userInfo->firstname . " " . $userInfo->lastname,
                 ],
                 "submit" => [
                     "type" => "submit",
-                    "value" => "Create Question",
+                    "value" => "Publish",
                     "callback" => [$this, "callbackSubmit"]
                 ],
             ]
         );
     }
 
+
+    public function getUserDetails($id) : object
+    {
+        $user = new User();
+        $user->setDb($this->di->get("dbqb"));
+        $user->find("id", $id);
+
+        return $user;
+    }
 
 
     /**
@@ -61,10 +73,8 @@ class CreateQuestionForm extends FormModel
         $user = new User();
         $user->setDb($this->di->get("dbqb"));
 
-        $questions->userId ="1";
-
-
-        // $questions->question = $this->form->value("question");
+        $questions->username = $this->form->value("username");
+        $questions->userId  = $this->di->session->get("userId");
         $questions->question = $this->form->value("question");
         $questions->tags = $this->form->value("tags");
         $questions->created = date('Y-m-d H:i');
@@ -79,10 +89,12 @@ class CreateQuestionForm extends FormModel
             if (!$tags->tag == $tagArray) {
                 $tags->tag = $tagArray;
                 $tags->counter = 1;
+                $tags->created = date('Y-m-d H:i');
                 $tags->save();
             } else {
                 $tags->tag = $tagArray;
                 $tags->counter = $tags->counter + 1;
+                $tags->created = date('Y-m-d H:i');
                 $tags->save();
             }
         }
@@ -92,6 +104,7 @@ class CreateQuestionForm extends FormModel
         $user->save();
         return true;
     }
+
 
     /**
      * Callback what to do if the form was successfully submitted, this

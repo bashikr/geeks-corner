@@ -12,7 +12,7 @@ return [
     "items" => [
         [
             "text" => "HOME",
-            "url" => "",
+            "url" => "home",
             "title" => "Home page",
         ],
         [
