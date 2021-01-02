@@ -6,8 +6,10 @@ Geeks Corner is a forum to help students communicating and collaborating with ea
 ### Continuous Integration and Code Scrutinizer badges:
 
 [![CircleCI](https://circleci.com/gh/bashikr/geeks-corner.svg?style=svg)](https://app.circleci.com/pipelines/github/bashikr/geeks-corner)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bashikr/geeks-corner/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/bashikr/geeks-corner/?branch=main)
 [![Build Status](https://travis-ci.com/bashikr/geeks-corner.svg?branch=main)](https://travis-ci.com/bashikr/geeks-corner)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bashikr/geeks-corner/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/bashikr/geeks-corner/?branch=main)
+[![Build Status](https://scrutinizer-ci.com/g/bashikr/geeks-corner/badges/build.png?b=main)](https://scrutinizer-ci.com/g/bashikr/geeks-corner/build-status/main)
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/bashikr/geeks-corner/badges/code-intelligence.svg?b=main)](https://scrutinizer-ci.com/code-intelligence)
 
 ### How to make the project work:
 

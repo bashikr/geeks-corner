@@ -2,10 +2,10 @@ Revision history
 =================================
 
 
-Version 2.0.0 (2021-01-2)
+Version 2.0.0 (2021-01-02)
 ---------------------------------
 
-Applied most of project i.e. added question, answer, and comment services.
+Applied most of the project i.e. added question, answer, and comment services.
 
 ***
 
