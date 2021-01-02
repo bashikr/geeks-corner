@@ -18,6 +18,7 @@ Geeks Corner is a forum to help students communicating and collaborating with ea
 2- Execute the following in the projects root.
 
 ``` composer install update ```
+
 3- Enter the repository sql/ddl and then run
 
 ```bash  bash database.bash```
