@@ -35,7 +35,6 @@ endif;
         margin-bottom:20px;
         vertical-align: center;
         border-radius:25px;
-
     }
 
     .box-center p {
@@ -46,6 +45,5 @@ endif;
         margin: auto;
         width: 40%;
         vertical-align: center;
-        /* padding: 20px; */
     }
 </style>
