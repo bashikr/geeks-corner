@@ -7,53 +7,59 @@ $questions = isset($questions) ? $questions : null;
 
 ?>
 
-
 <h2 style="text-align:center">Top three questions</h2>
-        <?php foreach ($topThreeQuestions as $question) : ?>
-            <div class="box-questions" style="margin-bottom:20px;height:auto;">
-                <a href="<?= url("questions/view/{$question->id}"); ?>">
-                    <h2><?= mb_substr(strtoupper($question->question), 0, 25, "UTF-8") ?></h2>
-                </a>
-                <div style="text-align:left;padding-left:100px;">
+    <?php foreach ($topThreeQuestions as $question) : ?>
+        <div class="box-questions" style="margin-bottom:20px;height:auto;">
+            <a href="<?= url("questions/view/{$question->id}"); ?>">
+                <h2><?= mb_substr(strtoupper($question->question), 0, 25, "UTF-8") ?></h2>
+            </a>
+            <div class="boxInsideBox">
+                <h3>Question:</h3> <p><?= $filter->doFilter($question->question, ["markdown"]); ?></p>
 
-                    <p>Question: <?= $filter->doFilter($question->question, ["markdown"]); ?></p>
-                    <p>votes: <?= $question->votes ?> </p>
-                    <p style="border-top:2px solid black;padding-top:50px;">Answers on this question: <?= count($answers->findAllWhere("questionId = ? AND userId = ?", [$question->id, $question->userId])) ?></p>
-                    <p>tags: <?= $question->tags ?> </p>
-                    <p>By: <a href="<?= url("user/view-user-info") . "/" . $question->userId . "/user"; ?>"><?= $question->username?></a></p>
-                    <p>Posted at: <?= $question->created ?>. </p>
-                </div>
+                <p style="border-top:2px solid black;padding-top:25px;">Answers on this question: <?= count($answers->findAllWhere("questionId = ? AND userId = ?", [$question->id, $question->userId])) ?></p>
+                <p>Question rank: <?= $question->votes ?> </p>
+                <p>Tags: <?= $question->tags ?>.</p>
+                <p>Written by: <a class="tagsA" href="<?= url("user/view-user-info") . "/" . $question->userId . "/user"; ?>"><?= $question->username?></a></p>
+                <p>Posted at: <?= $question->created ?>. </p>
             </div>
-        <?php endforeach ?>
+        </div>
+    <?php endforeach ?>
 
 
+    <h3 style="text-align:center;">The most active users</h3>
+    <div style="margin:20px;text-align:center;">
         <?php foreach ($topThreeActiveUsers as $activeUser) : ?>
-            <div class="box-questions" style="margin-bottom:20px;height:auto;">
-                <a href="<?= url("questions/view/{$question->id}"); ?>">
-                    <h2><?= $activeUser->firstname . " " . $activeUser->lastname ?></h2>
-                </a>
-                <div style="text-align:left;padding-left:100px;">
-                <img src="img/<?= $activeUser->gender . ".png" ?>" >
-                    <p>votes: <?= $activeUser->score ?> </p>
+                <div class="box-user-home">
+                    <a href="<?= url("user/view-user-info/" . $activeUser->id . "/user"); ?>">
+                        <h2><?= $activeUser->firstname . " " . $activeUser->lastname ?></h2>
+                    </a>
+                    <img src="img/<?= $activeUser->gender . ".png" ?>" >
+                    <div style="text-align:left;padding-left:10px;">
+                        <p>Score: <?= $activeUser->score +
+                        count($answers->findAllWhere("userId = ?", [$activeUser->id])) +
+                        count($questions->findAllWhere("userId = ?", [$activeUser->id])) +
+                        count($comments->findAllWhere("userId = ?", [$activeUser->id])) ?>.
+                        </p>
 
-                    <p>Joined at: <?= $activeUser->created ?>. </p>
+                        Joined at: <p style="font-size:0.85rem;"><?= $activeUser->created ?>. </p>
+                    </div>
                 </div>
-            </div>
         <?php endforeach ?>
+    </div>
 
-        <?php foreach ($topThreeTags as $activeTag) : ?>
-            <div class="box-questions" style="margin-bottom:20px;height:auto;">
+    <h3 style="text-align:center;">The most popular tags</h3>
+    <div style="margin:20px;text-align:center;">
+    <?php foreach ($topThreeTags as $activeTag) : ?>
+        <div class="box-user-home">
 
-                <div style="text-align:left;padding-left:100px;">
-                    <p>tag: <?= $activeTag->tag ?> </p>
-                    <p>creation date: <?= $activeTag->created ?>. </p>
-                    <p>Counter: <?= $activeTag->counter ?>. </p>
-                    <p>Id: <?= $activeTag->id ?>. </p>
-                </div>
+            <div style="text-align:left;padding-left:10px;">
+                <h3 style="text-align:center;"><?= $activeTag->tag ?> </h3>
+                <p>Rank: <?= $activeTag->counter ?>. </p>
+                Creation date: <p style="font-size:0.85rem;"><?= $activeTag->created ?>. </p>
             </div>
-        <?php endforeach ?>
-
-
+        </div>
+    <?php endforeach ?>
+    </div>
 
 <style>
     img {

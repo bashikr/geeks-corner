@@ -15,7 +15,7 @@ endif;
 ?>
 
 
-<h3>All tags</h3>
+<h3 style="text-align:center;">All tags</h3>
     <div class="box-center">
         <?php foreach ($items as $item) : ?>
             <div class="box">
@@ -26,13 +26,15 @@ endif;
 
 <style>
     .box {
-        border: 2px solid #333;
-        padding: .5em;
+        border: 5px solid #333;
+        padding: 10px 20px;
+        padding-top:25px;
         width: 30%;
         max-width: 100%;
         text-align: center;
         margin-bottom:20px;
         vertical-align: center;
+        border-radius:25px;
 
     }
 
@@ -44,6 +46,6 @@ endif;
         margin: auto;
         width: 40%;
         vertical-align: center;
-        padding: 20px;
+        /* padding: 20px; */
     }
 </style>

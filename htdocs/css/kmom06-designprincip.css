@@ -7084,6 +7084,18 @@ fieldset {
   margin:auto;
 }
 
+
+.box-user-home {
+  border: 5px solid #333;
+  width: 25%;
+  max-width: 100%;
+  padding: 10px;
+  border-radius: 25px;
+  display: inline-block;
+  height:auto;
+}
+
+
 .box-questions {
   border: 5px solid #333;
   width: 75%;
