@@ -12,12 +12,11 @@ $urlToLogin = url("user/login");
 ?>
 
 <?php if (empty($di->session->get("login"))) : ?>
-    <p>
-        <p>You have to login to access this page.</p>
-        <a href="<?= $urlToLogin ?>">Login</a> |
-        <a href="<?= $urlToRegister ?>">Register</a>
-    </p>
-    <hr>
+    <div class="form">
+        <h5 style="border-bottom:none; margin-bottom:50px;">You have to login to create a question.</h5>
+        <a class="button" href="<?= $urlToLogin ?>">Login</a>
+        <a class="button" href="<?= $urlToRegister ?>">Register</a>
+    </div>
 <?php else : ?>
     <div class="form" style="height:auto;width:50%;padding-top:20px;">
         <h1 style="border-bottom:none;">Create a new question</h1>

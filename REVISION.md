@@ -1,6 +1,12 @@
 Revision history
 =================================
 
+Version 3.0.0 (2021-01-05)
+---------------------------------
+
+Focused on the design and UI/UX aspects of the project.
+
+***
 
 Version 2.0.0 (2021-01-02)
 ---------------------------------
