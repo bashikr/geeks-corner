@@ -3,5 +3,5 @@
 To keep in touch, please contact us on the following email:
 <br><br>
 
-bashikr@gmail.com
+contact@geekscorner.com
 </p>

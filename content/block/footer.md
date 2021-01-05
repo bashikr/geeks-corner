@@ -1,1 +1,1 @@
-Copyright © 2020 | Bashar Altaleb | All Rights Reserved
+Copyright © 2020 | Geeks Corner | All Rights Reserved
