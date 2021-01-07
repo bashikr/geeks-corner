@@ -21,7 +21,7 @@ class QuestionsController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function indexActionGet() : object
+    public function indexAction() : object
     {
         $page = $this->di->get("page");
         $questions = new Questions();

@@ -7,7 +7,7 @@ return [
         [
             "info" => "All Questions",
             "mount" => "questions",
-            "handler" => "Anax\Questions\QuestionsController",
+            "handler" => "\Anax\Questions\QuestionsController",
         ],
     ]
 ];

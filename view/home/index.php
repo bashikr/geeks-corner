@@ -9,7 +9,7 @@ $questions = isset($questions) ? $questions : null;
 
     <div style="margin:10px;width:10%;" class="wrap2">
         <audio id="audioMusic">
-            <source src="./img/welcome.mp3" type="audio/mpeg">
+            <source src="img/welcome.mp3" type="audio/mpeg">
         </audio>
         <a class="hover-fx"><i class="fas fa-play-circle" onclick="bell()"></i></a>
     </div>
