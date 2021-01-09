@@ -5,17 +5,18 @@ namespace Anax\View;
 $urlToCreate = url("user/register");
 $urlToSignIn = url("user/login");
 $urlToLogout = url("user/logout");
+
 ?>
 
 
-<?php if (empty($di->session->get("login"))) : ?>
+<?php if ($di->session->get("login") == false || $di->session->get("login") == null) : ?>
     <div class="form" style="width:50%;">
         <div style="padding-top:70px;">
             <a class="button" href="<?= $urlToCreate ?>">Register</a>
             <a class="button" href="<?= $urlToSignIn ?>">Login</a>
         </div>
     </div>
-<?php else : ?>
+<?php elseif($di->session->get("login") == true) : ?>
     <p style="text-align:center;">
         <a href="<?= $urlToLogout ?>">Logout</a>
     </p>

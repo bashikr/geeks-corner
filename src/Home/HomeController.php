@@ -25,7 +25,6 @@ class HomeController implements ContainerInjectableInterface
      */
     public function indexActionGet()
     {
-        
         $questions = new Questions();
         $users = new User();
         $tags = new Tags();

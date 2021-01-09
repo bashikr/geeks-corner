@@ -51,11 +51,11 @@ $questions = isset($questions) ? $questions : null;
             <h2><?= mb_substr(strtoupper($question->question), 0, 25, "UTF-8") ?></h2>
         </a>
         <div class="boxInsideBox">
-        <?php if (empty($di->session->get("login"))) : ?>
-            <div style="filter: blur(4px);" id="test" onmousedown='return false;' onselectstart='return false;'>
-                <h3>Question:</h3> <p ><?= $filter->markdown($question->question); ?></p>
+        <?php if ($di->session->get("login") == false || $di->session->get("login") == null) : ?>
+            <div style="filter: blur(4px); user-select:none;" id="test" onmousedown='return false;' onselectstart='return false;'>
+                <h3>Question:</h3> <p>You have to login first!</p>
             </div>
-        <?php elseif(!empty($di->session->get("login"))) :?>
+        <?php elseif($di->session->get("login") == true) :?>
             <div>
                 <h3>Question:</h3> <p><?= $filter->markdown($question->question); ?></p>
             </div>

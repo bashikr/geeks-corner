@@ -11,7 +11,7 @@ $urlToRegister = url("user/register");
 $urlToLogin = url("user/login");
 ?>
 
-<?php if (empty($di->session->get("login"))) : ?>
+<?php if ($di->session->get("login") == false || $di->session->get("login") == null) : ?>
     <div class="form">
         <h5 style="border-bottom:none; margin-bottom:50px;">You have to login to create a question.</h5>
         <a class="button" href="<?= $urlToLogin ?>">Login</a>

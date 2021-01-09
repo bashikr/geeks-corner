@@ -30,12 +30,11 @@ class UserController implements ContainerInjectableInterface
     public function indexAction() : object
     {
         $page = $this->di->get("page");
-        $session = $this->di->get("session");
         $user = new User();
         $user->setDb($this->di->get("dbqb"));
 
 
-        $user->find("email", $session->get("user"));
+        $user->find("email", $this->di->get("session")->get("user"));
         $questions = new Questions;
         $questions->setDb($this->di->get("dbqb"));
         $answers = new Answers;
@@ -93,6 +92,7 @@ class UserController implements ContainerInjectableInterface
         ]);
     }
 
+
     /**
      * Handler with form to create a new item.
      *
@@ -111,7 +111,6 @@ class UserController implements ContainerInjectableInterface
         return $page->render([
             "title" => "Sign up a new user",
         ]);
-        
     }
 
 
@@ -126,7 +125,6 @@ class UserController implements ContainerInjectableInterface
         $form = new LoginUserForm($this->di);
         $form->check();
 
-        
         $page->add("user/crud/login", [
             "form" => $form->getHTML(),
         ]);
@@ -139,42 +137,11 @@ class UserController implements ContainerInjectableInterface
 
     public function logoutAction() : object
     {
-        $page = $this->di->get("page");
-        $this->di->session->delete("user");
-        $this->di->session->delete("login");
-        $form = new LoginUserForm($this->di);
-        $form->check();
-        $this->di->session->destroy();
+        $session = $this->di->get("session");
 
-        $page->add("user/crud/logout", [
-            "form" => $form->getHTML()
-        ]);
+        $session->destroy();
 
-
-        return $page->render([
-            "title" => "User logout",
-
-        ]);
-    }
-
-    /**
-     * Handler with form to delete an item.
-     *
-     * @return object as a response object
-     */
-    public function deleteAction() : object
-    {
-        $page = $this->di->get("page");
-        $form = new DeleteUserForm($this->di);
-        $form->check();
-
-        $page->add("user/crud/delete", [
-            "form" => $form->getHTML(),
-        ]);
-
-        return $page->render([
-            "title" => "Delete a user",
-        ]);
+        return $this->di->response->redirect("home");
     }
 
 
@@ -191,7 +158,6 @@ class UserController implements ContainerInjectableInterface
         $page = $this->di->get("page");
         $form = new UpdateUserForm($this->di, $id);
         $form->check();
-        // var_dump($this->di->session->get("userId"));
 
         if ($this->di->session->get("userId") == $id) {
             $page->add("user/crud/update", [

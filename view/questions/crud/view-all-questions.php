@@ -18,13 +18,13 @@ $urlToLogin = url("user/login");
 
 <h1 style="text-align:center;border-bottom:none;">View all questions</h1>
 
-<?php if (empty($di->session->get("login"))) : ?>
+<?php if ($di->session->get("login") == false || $di->session->get("login") == null) : ?>
     <div class="form">
         <h5 style="border-bottom:none; margin-bottom:50px;">You have to login to create a question.</h5>
         <a class="button" href="<?= $urlToLogin ?>">Login</a>
         <a class="button" href="<?= $urlToRegister ?>">Register</a>
     </div>
-<?php else : ?>
+<?php elseif($di->session->get("login") == true) : ?>
     <div style="text-align:center; margin:50px;">
         <a class="button" href='<?= $urlToCreate . "/". $di->session->get("userId") ?>'>New Question</a>
     </div>
@@ -39,11 +39,11 @@ $urlToLogin = url("user/login");
                 <h2><?= mb_substr($question->question, 0, 110, "UTF-8") ?></h2>
             </a>
             <div class="boxInsideBox">
-                <?php if (empty($di->session->get("login"))) : ?>
-                    <div style="filter: blur(4px);" id="test" onmousedown='return false;' onselectstart='return false;'>
-                        <h3>Question:</h3> <p ><?= $filter->markdown($question->question); ?></p>
+                <?php if ($di->session->get("login") == false || $di->session->get("login") == null) : ?>
+                    <div style="filter: blur(4px); user-select:none;" id="test" onmousedown='return false;' onselectstart='return false;'>
+                        <h3>Question:</h3> <p>You have to login first!</p>
                     </div>
-                <?php elseif(!empty($di->session->get("login"))) :?>
+                <?php elseif($di->session->get("login") == true) :?>
                     <div>
                         <h3>Question:</h3> <p><?= $filter->markdown($question->question); ?></p>
                     </div>
